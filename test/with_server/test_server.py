@@ -7,12 +7,6 @@ Tests the pyrc server by actually spinning up an actual server, and actually
 sending actual socket messages to it. This is integration testing, not unit
 testing, but it's suitably useful that it's the default testing mode.
 """
-import pytest
-import websocket
-import socket
-import time
-
-
 class TestServer(object):
     """
     Test the pyrc server.
