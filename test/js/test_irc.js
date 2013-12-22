@@ -182,3 +182,11 @@ describe("The serializeIRCMsg function", function() {
         expect(serialized).toBeUndefined();
     });
 });
+
+describe("The privmsg function", function() {
+    it("serialises a private message automatically", function() {
+        var expected = "PRIVMSG #python-requests :Hi there!\r\n";
+
+        expect(irc.privmsg("#python-requests", "Hi there!")).toBe(expected);
+    });
+});
