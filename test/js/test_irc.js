@@ -183,6 +183,7 @@ describe("The serializeIRCMsg function", function() {
     });
 });
 
+
 describe("The privmsg function", function() {
     it("serialises a private message automatically", function() {
         var expected = "PRIVMSG #python-requests :Hi there!\r\n";
