@@ -33,7 +33,12 @@ var irc = (function(window){
             out += ":" + msgobj.prefix + " ";
         }
 
-        out += msgobj.command;
+        if (!msgobj.command) {
+            return undefined;
+        }
+        else {
+            out += msgobj.command;
+        }
 
         if (msgobj.params) {
             out += " " + msgobj.params;

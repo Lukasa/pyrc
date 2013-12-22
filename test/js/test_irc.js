@@ -174,4 +174,11 @@ describe("The serializeIRCMsg function", function() {
 
         expect(serialized).toBe("PING\r\n");
     });
+
+    it("returns undefined if there is no command present", function() {
+        var msg = {};
+        var serialized = irc.serializeIRCMsg(msg);
+
+        expect(serialized).toBeUndefined();
+    });
 });
