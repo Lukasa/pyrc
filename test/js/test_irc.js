@@ -79,4 +79,14 @@ describe("The parseIRCMsg function", function() {
         expect(parsed.params).toBeUndefined();
         expect(parsed.trailing).toBeUndefined();
     });
+
+    it("accepts \\r\\n characters without mutating the output", function() {
+        var msg = ":Trillian SQUIT cm22.eng.umd.edu :Server out of control\r\n";
+        var parsed = irc.parseIRCMsg(msg);
+
+        expect(parsed.prefix).toBe("Trillian");
+        expect(parsed.command).toBe("SQUIT");
+        expect(parsed.params).toBe("cm22.eng.umd.edu");
+        expect(parsed.trailing).toBe("Server out of control");
+    });
 });
