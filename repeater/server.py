@@ -16,7 +16,7 @@ import os.path
 application = Application(
     [(r"/wsock/", Repeater)],
     gzip=True,
-    static_path=os.path.join(os.path.dirname(__file__), "../static/"),
+    static_path=os.path.join(os.path.dirname(__file__), "..", "static"),
 )
 
 if __name__ == '__main__':
