@@ -53,5 +53,13 @@ var irc = (function(window){
         return out;
     };
 
+    my.privmsg = function(target, message) {
+        return my.serializeIRCMsg({
+            command: "PRIVMSG",
+            params: target,
+            trailing: message
+        });
+    };
+
     return my;
 })(window);
