@@ -23,5 +23,30 @@ var irc = (function(window){
         };
     };
 
+    // Serializes an object representing a Javascript object to a string.
+    // Right now this is gloriously inefficient. Suck it up, we'll fix it
+    // later.
+    my.serializeIRCMsg = function(msgobj) {
+        var out = "";
+
+        if (msgobj.prefix) {
+            out += ":" + msgobj.prefix + " ";
+        }
+
+        out += msgobj.command;
+
+        if (msgobj.params) {
+            out += " " + msgobj.params;
+        }
+
+        if (msgobj.trailing) {
+            out += " :" + msgobj.trailing;
+        }
+
+        out += "\r\n";
+
+        return out;
+    };
+
     return my;
 })(window);
