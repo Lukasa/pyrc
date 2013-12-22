@@ -10,11 +10,14 @@ from tornado.ioloop import IOLoop
 from tornado.web import Application
 
 from .repeater import Repeater
+import os.path
 
 # Define the top-level Tornado application.
-application = Application([
-    (r"/wsock/", Repeater),
-])
+application = Application(
+    [(r"/wsock/", Repeater)],
+    gzip=True,
+    static_path=os.path.join(os.path.dirname(__file__), "../static/"),
+)
 
 if __name__ == '__main__':
     application.listen(80)
