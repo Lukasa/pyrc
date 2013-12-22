@@ -90,3 +90,88 @@ describe("The parseIRCMsg function", function() {
         expect(parsed.trailing).toBe("Server out of control");
     });
 });
+
+
+describe("The serializeIRCMsg function", function() {
+    it("can serialize IRC messages with the full set of values", function() {
+        var msg = {
+            prefix: "Trillian",
+            command: "SQUIT",
+            params: "cm22.eng.umd.edu",
+            trailing: "Server out of control"
+        };
+        var serialized = irc.serializeIRCMsg(msg);
+
+        expect(serialized).toBe(":Trillian SQUIT cm22.eng.umd.edu :Server out of control\r\n");
+    });
+
+    it("can serialize IRC messages missing prefixes", function() {
+        var msg = {
+            command: "SERVICE",
+            params: "dict * *.fr 0 0",
+            trailing: "French Dictionary"
+        };
+        var serialized = irc.serializeIRCMsg(msg);
+
+        expect(serialized).toBe("SERVICE dict * *.fr 0 0 :French Dictionary\r\n");
+    });
+
+    it("can serialize IRC messages missing arguments", function() {
+        var msg = {
+            prefix: "Trillian",
+            command: "AWAY",
+            trailing: "Gone to lunch."
+        };
+        var serialized = irc.serializeIRCMsg(msg);
+
+        expect(serialized).toBe(":Trillian AWAY :Gone to lunch.\r\n");
+    });
+
+    it("can serialize IRC messages missing trailing segments", function() {
+        var msg = {
+            prefix: "Lukasa",
+            command: "WHOWAS",
+            params: "Trillian 1 *.edu"
+        };
+        var serialized = irc.serializeIRCMsg(msg);
+
+        expect(serialized).toBe(":Lukasa WHOWAS Trillian 1 *.edu\r\n");
+    });
+
+    it("can serialize IRC messages missing prefix and arguments", function() {
+        var msg = {
+            command: "AWAY",
+            trailing: "Gone to lunch."
+        };
+        var serialized = irc.serializeIRCMsg(msg);
+
+        expect(serialized).toBe("AWAY :Gone to lunch.\r\n");
+    });
+
+    it("can serialize IRC messages missing arguments and trailing", function() {
+        var msg = {
+            prefix: "Trillian",
+            command: "LIST"
+        };
+        var serialized = irc.serializeIRCMsg(msg);
+
+        expect(serialized).toBe(":Trillian LIST\r\n");
+    });
+
+    it("can serialize IRC messages missing prefix and trailing", function() {
+        var msg = {
+            command: "WHOWAS",
+            params: "Trillian 1 *.edu"
+        };
+        var serialized = irc.serializeIRCMsg(msg);
+
+        expect(serialized).toBe("WHOWAS Trillian 1 *.edu\r\n");
+    });
+
+    it("can serialize IRC messages that are just commands", function() {
+        var msg = {command: "PING"};
+        var serialized = irc.serializeIRCMsg(msg);
+
+        expect(serialized).toBe("PING\r\n");
+    });
+});
