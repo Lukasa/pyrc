@@ -9,7 +9,7 @@ pyrcApp.controller("ircCtrl", function($scope) {
         $scope.$apply(function() {
             if (message.command == "PRIVMSG") {
                 $scope.messages.push({
-                    from: message.prefix,
+                    from: message.prefix.split('!', 2)[0],
                     text: message.trailing
                 });
             }
