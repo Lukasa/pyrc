@@ -62,5 +62,20 @@ var irc = (function(window){
         });
     };
 
+    // Return a serialized set of messages that correspond to a login sequence.
+    my.loginMsg = function(username) {
+        var nick = my.serializeIRCMsg({
+            command: "NICK",
+            params: username
+        });
+        var user = my.serializeIRCMsg({
+            command: "USER",
+            params: username + " 0 *",
+            trailing: username
+        });
+
+        return [nick, user];
+    };
+
     return my;
 })(window);
