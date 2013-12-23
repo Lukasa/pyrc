@@ -12,9 +12,10 @@ var irc = (function(window){
     // fields are named "prefix", "command", "params" and "trailing". Only the
     // "command" field is mandatory: the others may be set to undefined.
     my.parseIRCMsg = function(msg){
+        if (!msg) return undefined;
         msg = msg.trim();
         var parsed = IRCRegex.exec(msg);
-        if (!parsed) return null;
+        if (!parsed) return undefined;
         else return {
             prefix:   parsed[1],
             command:  parsed[2],

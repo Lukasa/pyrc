@@ -89,6 +89,10 @@ describe("The parseIRCMsg function", function() {
         expect(parsed.params).toBe("cm22.eng.umd.edu");
         expect(parsed.trailing).toBe("Server out of control");
     });
+
+    it("returns undefined if the argument is null", function() {
+        expect(irc.parseIRCMsg(null)).toBeUndefined();
+    });
 });
 
 
