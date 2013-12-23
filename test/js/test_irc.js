@@ -191,3 +191,24 @@ describe("The privmsg function", function() {
         expect(irc.privmsg("#python-requests", "Hi there!")).toBe(expected);
     });
 });
+
+
+describe("The loginMsg function", function() {
+    it("serializes two messages", function() {
+        expect(irc.loginMsg("Lukasa").length).toBe(2);
+    });
+
+    it("builds the correct NICK message", function() {
+        var nick = irc.loginMsg("Lukasa")[0];
+        var expected = "NICK Lukasa\r\n";
+
+        expect(nick).toBe(expected);
+    });
+
+    it("builds the correct USER message", function() {
+        var user = irc.loginMsg("Lukasa")[1];
+        var expected = "USER Lukasa 0 * :Lukasa\r\n";
+
+        expect(user).toBe(expected);
+    })
+});
