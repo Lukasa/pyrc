@@ -31,19 +31,33 @@ var joinChannel = function(connection, channel) {
 };
 
 
+// Handles incoming IRC messages. Response to PINGs, and turns PRIVMSG
+// messages into structures suitable for consumption in the Angular code.
+var msgHandlerLoop = function(connection, onMsgCallback) {
+    return function(event) {
+        var msg = irc.parseIRCMsg(event.data);
+        if (!msg) return;
+
+        // Handle PINGs.
+        if (msg.command == "PING") {
+            connection.send(irc.handlePing(msg));
+            return;
+        }
+
+        // Otherwise, call the callback with the parsed message.
+        onMsgCallback(msg);
+    };
+};
+
+
 // A shim in place to get stuff working quickly. Logs in to chat.freenode.net
 // with a hardcoded-username, joins a single IRC channel, and logs everything
 // to the console.
-var main = function() {
+var ircLoop = function(onMsgCallback) {
     var conn = openIRCConnection();
     conn.onopen = function() {
         login(conn, "Pyrc");
         joinChannel(conn, "#python-requests");
     };
-    conn.onmessage = function(event) {
-        console.log(event.data);
-    };
-    window.conn = conn;
+    conn.onmessage = msgHandlerLoop(conn, onMsgCallback);
 };
-
-window.onload = main;
