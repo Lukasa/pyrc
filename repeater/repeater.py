@@ -29,7 +29,7 @@ class Repeater(WebSocketHandler):
         self.target_port = 6667
         self.half_closed = False
 
-    def open(self):
+    def open(self, *args, **kwargs):
         """
         When a websocket connection is opened, we open a TCP connection to the
         remote server. Wait to start hearing traffic from it.
