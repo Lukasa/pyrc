@@ -210,5 +210,14 @@ describe("The loginMsg function", function() {
         var expected = "USER Lukasa 0 * :Lukasa\r\n";
 
         expect(user).toBe(expected);
+    });
+});
+
+
+describe("The joinChannel function", function() {
+    it("serializes a JOIN message automatically", function() {
+        var expected = "JOIN #python-requests\r\n";
+
+        expect(irc.joinChannel("#python-requests")).toBe(expected);
     })
 });
