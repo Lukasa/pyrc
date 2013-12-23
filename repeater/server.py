@@ -24,8 +24,8 @@ class HomeHandler(RequestHandler):
 # Define the top-level Tornado application.
 application = Application(
     [
-        (r"/wsock/", Repeater),
-        (r"/", HomeHandler),
+        (r"/wsock/?$", Repeater),
+        (r"/$", HomeHandler),
     ],
     gzip=True,
     static_path=os.path.join(os.path.dirname(__file__), "..", "static"),
