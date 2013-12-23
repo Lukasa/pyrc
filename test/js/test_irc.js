@@ -219,5 +219,23 @@ describe("The joinChannel function", function() {
         var expected = "JOIN #python-requests\r\n";
 
         expect(irc.joinChannel("#python-requests")).toBe(expected);
+    });
+});
+
+
+describe("The handlePing function", function() {
+    it("builds a PING message", function() {
+        var msg = {command: "PING"};
+        expect(irc.handlePing(msg)).toContain("PONG");
+    });
+
+    it("reflects the arguments of the original message", function() {
+        var msg = {command: "PING", params: "Some arguments"};
+        expect(irc.handlePing(msg)).toBe("PONG Some arguments\r\n");
+    });
+
+    it("reflects the trailing segment too", function() {
+        var msg = {command: "PING", params: "One", trailing: "Two"};
+        expect(irc.handlePing(msg)).toBe("PONG One :Two\r\n");
     })
 });

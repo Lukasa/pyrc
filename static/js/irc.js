@@ -85,5 +85,15 @@ var irc = (function(window){
         });
     };
 
+    // Return a suitable PONG response to a PING. Just attach whatever is in
+    // the arguments/trailing section of the PING to the PONG.
+    my.handlePing = function(msg) {
+        return my.serializeIRCMsg({
+            command: "PONG",
+            params: msg.params,
+            trailing: msg.trailing
+        });
+    };
+
     return my;
 })(window);
