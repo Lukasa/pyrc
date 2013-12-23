@@ -13,13 +13,17 @@ from .repeater import Repeater
 import os.path
 
 
+INDEX_LOC = os.path.join(os.path.dirname(__file__), "templates", "index.html")
+
+
 class HomeHandler(RequestHandler):
     """
     Render the home page. For now there's no intelligent logic here, but there
     might be at a later date.
     """
     def get(self):
-        self.render("index.html")
+        with open(INDEX_LOC, 'r') as f:
+            self.write(f.read())
 
 # Define the top-level Tornado application.
 application = Application(
