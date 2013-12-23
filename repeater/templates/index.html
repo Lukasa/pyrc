@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="pyrcApp">
 <head>
     <meta charset="utf-8">
     <title>PyRC</title>
@@ -7,10 +7,13 @@
     <meta name="author" content="Cory Benfield">
 
     <!-- Let's include some Javascript. Woo! -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
     <script src="/static/js/irc.js"></script>
     <script src="/static/js/pyrc.js"></script>
+    <script src="/static/js/app.js"></script>
 </head>
-<body>
-    <h1>Nothing here yet, check back later!</h1>
+<body ng-controller="ircCtrl">
+    <h1>Welcome to PyRC.</h1>
+    <p ng-repeat="message in messages"><strong>{{message.from}}:</strong> {{message.text}}</p>
 </body>
 </html>
