@@ -77,5 +77,13 @@ var irc = (function(window){
         return [nick, user];
     };
 
+    // Return a serialized channel join message.
+    my.joinChannel = function(channel) {
+        return my.serializeIRCMsg({
+            command: "JOIN",
+            params: channel
+        });
+    };
+
     return my;
 })(window);
