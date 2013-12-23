@@ -53,6 +53,7 @@ var irc = (function(window){
         return out;
     };
 
+    // Return a serialized private message.
     my.privmsg = function(target, message) {
         return my.serializeIRCMsg({
             command: "PRIVMSG",
