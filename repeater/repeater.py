@@ -34,6 +34,10 @@ class Repeater(WebSocketHandler):
         When a websocket connection is opened, we open a TCP connection to the
         remote server. Wait to start hearing traffic from it.
         """
+        server = self.get_argument('server', None)
+        if server is not None:
+            self.target_host = server
+
         sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.tcp = IOStream(sck)
         self.tcp.set_close_callback(self.async_callback(self.on_irc_close))
