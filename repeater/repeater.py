@@ -10,7 +10,7 @@ of asynchronous joy.
 """
 import socket
 from tornado.websocket import WebSocketHandler
-from tornado.iostream import IOStream
+from tornado.iostream import IOStream, StreamClosedError
 
 
 class Repeater(WebSocketHandler):
@@ -49,7 +49,10 @@ class Repeater(WebSocketHandler):
         Called whenever a websocket message is received. Echoes the message,
         without adjustment, on the TCP connection.
         """
-        self.tcp.write(message.encode('utf-8'))
+        try:
+            self.tcp.write(message.encode('utf-8'))
+        except StreamClosedError:
+            self.on_irc_close()
 
     def on_irc_message(self, data):
         """
@@ -57,7 +60,12 @@ class Repeater(WebSocketHandler):
         message, without qualification, on the websocket connection.
         """
         self.write_message(data)
-        self.tcp.read_until(b"\n", self.async_callback(self.on_irc_message))
+
+        try:
+            self.tcp.read_until(b"\n",
+                                self.async_callback(self.on_irc_message))
+        except StreamClosedError:
+            self.on_irc_close()
 
     def on_close(self):
         """
