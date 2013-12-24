@@ -7,9 +7,14 @@ pyrcApp.controller("ConnectionController", function($scope) {
     $scope.msg = "";
     $scope.username = "Pyrc";
 
+    // Save off the channel when we get inited.
+    $scope.init = function(channel) {
+        $scope.channel = channel;
+    };
+
     // Define the controller method for sending an IRC message.
     $scope.sendIrcMessage = function() {
-        message = irc.privmsg("#python-requests", $scope.msg);
+        message = irc.privmsg($scope.channel, $scope.msg);
         window.conn.send(message);
 
         $scope.messages.push({
