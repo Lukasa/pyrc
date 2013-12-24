@@ -8,7 +8,8 @@ pyrcApp.controller("ircCtrl", function($scope) {
 
     // Define the controller method for sending an IRC message.
     $scope.sendIrcMessage = function() {
-        window.conn.send(irc.privmsg("#python-requests", $scope.msg));
+        message = irc.privmsg("#python-requests", $scope.msg);
+        window.conn.send(message);
     };
 
     ircLoop(function(message) {
