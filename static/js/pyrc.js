@@ -60,4 +60,5 @@ var ircLoop = function(onMsgCallback) {
         joinChannel(conn, "#python-requests");
     };
     conn.onmessage = msgHandlerLoop(conn, onMsgCallback);
+    window.conn = conn;
 };
