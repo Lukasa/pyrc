@@ -12,6 +12,11 @@ pyrcApp.controller("ircCtrl", function($scope) {
         message = irc.privmsg("#python-requests", $scope.msg);
         window.conn.send(message);
 
+        $scope.messages.push({
+            from: $scope.username,
+            text: $scope.msg
+        });
+
         // Clear the message box.
         $scope.msg = "";
     };
