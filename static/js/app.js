@@ -10,6 +10,9 @@ pyrcApp.controller("ircCtrl", function($scope) {
     $scope.sendIrcMessage = function() {
         message = irc.privmsg("#python-requests", $scope.msg);
         window.conn.send(message);
+
+        // Clear the message box.
+        $scope.msg = "";
     };
 
     ircLoop(function(message) {
