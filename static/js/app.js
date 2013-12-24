@@ -5,6 +5,7 @@ var pyrcApp = angular.module("pyrcApp", []);
 pyrcApp.controller("ircCtrl", function($scope) {
     $scope.messages = [];
     $scope.msg = "";
+    $scope.username = "Pyrc";
 
     // Define the controller method for sending an IRC message.
     $scope.sendIrcMessage = function() {
@@ -15,7 +16,7 @@ pyrcApp.controller("ircCtrl", function($scope) {
         $scope.msg = "";
     };
 
-    ircLoop(function(message) {
+    ircLoop($scope.username, function(message) {
         $scope.$apply(function() {
             if (message.command == "PRIVMSG") {
                 $scope.messages.push({

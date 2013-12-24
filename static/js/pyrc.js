@@ -53,10 +53,10 @@ var msgHandlerLoop = function(connection, onMsgCallback) {
 // A shim in place to get stuff working quickly. Logs in to chat.freenode.net
 // with a hardcoded-username, joins a single IRC channel, and logs everything
 // to the console.
-var ircLoop = function(onMsgCallback) {
+var ircLoop = function(username, onMsgCallback) {
     var conn = openIRCConnection();
     conn.onopen = function() {
-        login(conn, "Pyrc");
+        login(conn, username);
         joinChannel(conn, "#python-requests");
     };
     conn.onmessage = msgHandlerLoop(conn, onMsgCallback);
