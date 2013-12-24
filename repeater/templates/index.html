@@ -12,7 +12,7 @@
     <script src="/static/js/pyrc.js"></script>
     <script src="/static/js/app.js"></script>
 </head>
-<body ng-controller="ircCtrl">
+<body ng-controller="ConnectionController">
     <h1>Welcome to PyRC.</h1>
     <p ng-repeat="message in messages"><strong>{{message.from}}:</strong> {{message.text}}</p>
     <p><input type="text" ng-model="msg"><input type="button" value="send" ng-click="sendIrcMessage()"></p>

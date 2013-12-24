@@ -2,7 +2,7 @@
 // as I go.
 var pyrcApp = angular.module("pyrcApp", []);
 
-pyrcApp.controller("ircCtrl", function($scope) {
+pyrcApp.controller("ConnectionController", function($scope) {
     $scope.messages = [];
     $scope.msg = "";
     $scope.username = "Pyrc";
