@@ -41,7 +41,9 @@ pyrcApp.controller("ChannelController", function($scope) {
             });
         };
 
-        // JOIN the channel.
+        // JOIN the channel. If we join too quickly, we'll try to send over
+        // a websocket connection that isn't open yet. In that case, add our
+        // message to the onopen action.
         try {
             window.conn.send(irc.joinChannel(channel));
         } catch (e) {
