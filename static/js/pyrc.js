@@ -57,7 +57,6 @@ var ircLoop = function(username, onMsgCallback) {
     var conn = openIRCConnection();
     conn.onopen = function() {
         login(conn, username);
-        joinChannel(conn, "#python-requests");
     };
     conn.onmessage = msgHandlerLoop(conn, onMsgCallback);
     window.conn = conn;
