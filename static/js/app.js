@@ -10,7 +10,14 @@ var channels = {};
 // function. In particular, it basically wraps the notion of multiple channels.
 pyrcApp.controller("ConnectionController", function($scope) {
     $scope.username = "Pyrc";
-    $scope.channels = ["#python-requests", "#GoBotTest"];
+    $scope.channels = ["#python-requests"];
+    $scope.chan = "";
+
+    // Join a new channel.
+    $scope.joinIrcChannel = function() {
+        $scope.channels.push($scope.chan);
+        $scope.chan = "";
+    };
 
     // Start the IRC loop. If we get a PRIVMSG, farm it out to the controller
     // callback appropriate to the channel.
