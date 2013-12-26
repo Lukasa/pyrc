@@ -9,9 +9,10 @@ var channels = {};
 // Define the Connection controller. This handles top-level connection
 // function. In particular, it basically wraps the notion of multiple channels.
 pyrcApp.controller("ConnectionController", function($scope) {
-    $scope.username = "Pyrc";
+    $scope.username = "";
     $scope.channels = ["#python-requests"];
     $scope.chan = "";
+    $scope.loggedIn = false;
 
     // Join a new channel.
     $scope.joinIrcChannel = function() {
@@ -21,11 +22,15 @@ pyrcApp.controller("ConnectionController", function($scope) {
 
     // Start the IRC loop. If we get a PRIVMSG, farm it out to the controller
     // callback appropriate to the channel.
-    ircLoop($scope.username, function(message) {
-        if (message.command == "PRIVMSG") {
-            channels[message.params](message);
-        }
-    });
+    $scope.logIn = function(username) {
+        $scope.username = username;
+        $scope.loggedIn = true;
+        ircLoop(username, function(message) {
+            if (message.command == "PRIVMSG") {
+                channels[message.params](message);
+            }
+        });
+    };
 });
 
 pyrcApp.controller("ChannelController", function($scope) {
