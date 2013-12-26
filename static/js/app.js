@@ -25,8 +25,33 @@ pyrcApp.controller("ConnectionController", function($scope) {
     $scope.logIn = function(username) {
         $scope.username = username;
         $scope.loggedIn = true;
+
         ircLoop(username, function(message) {
             if (message.command == "PRIVMSG") {
+                // Standardise the incoming messages. If this is a direct
+                // message to a channel that doesn't exist, we'll have to
+                // create it.
+                if (isDirectMessage(message, $scope.username)) {
+                    message = mutateDirectMsg(message);
+
+                    // If we create a channel, it won't have registered its
+                    // callback in time. Wait before we call it.
+                    if ($scope.channels.indexOf(message.params) == -1) {
+                        $scope.$apply(function() {
+                            $scope.channels.push(message.params);
+                        });
+
+                        window.setTimeout(
+                            function() {
+                                channels[message.params](message);
+                            },
+                            50
+                        );
+
+                        return;
+                    }
+                }
+
                 channels[message.params](message);
             }
         });
@@ -56,6 +81,9 @@ pyrcApp.controller("ChannelController", function($scope) {
         // JOIN the channel. If we join too quickly, we'll try to send over
         // a websocket connection that isn't open yet. In that case, add our
         // message to the onopen action.
+        // Only do this if the channel name begins with a '#' sign.
+        if (channel.indexOf('#') !== 0) return;
+
         try {
             window.conn.send(irc.joinChannel(channel));
         } catch (e) {

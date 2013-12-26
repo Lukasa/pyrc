@@ -31,6 +31,26 @@ var joinChannel = function(connection, channel) {
 };
 
 
+// Direct messages _to_ the user come in with this form:
+// ":fromuser PRIVMSG ouruser :text"
+// The way we model private messages, as channels to a user, needs the message
+// in this form:
+// ":fromuser PRIVMSG fromuser :text"
+var mutateDirectMsg = function(message) {
+    var fromUser = message.prefix.split('!', 2)[0];
+    message.params = fromUser;
+    return message;
+};
+
+
+// Check whether this message is a direct message to the user.
+var isDirectMessage = function(message, username) {
+    // If this is an incoming direct message, mutate it.
+    if (message.params == username) return true;
+    else return false;
+};
+
+
 // Handles incoming IRC messages. Response to PINGs, and turns PRIVMSG
 // messages into structures suitable for consumption in the Angular code.
 var msgHandlerLoop = function(connection, onMsgCallback) {
