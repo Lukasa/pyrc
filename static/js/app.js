@@ -9,36 +9,38 @@ var channels = {};
 // Define the Connection controller. This handles top-level connection
 // function. In particular, it basically wraps the notion of multiple channels.
 pyrcApp.controller("ConnectionController", function($scope) {
-    $scope.username = "";
-    $scope.channels = ["#python-requests"];
-    $scope.chan = "";
-    $scope.loggedIn = false;
+    $scope.connection = {
+        username: "",
+        channels: ["#python-requests"],
+        chan: "",
+        loggedIn: false
+    };
 
     // Join a new channel.
     $scope.joinIrcChannel = function() {
-        $scope.channels.push($scope.chan);
-        $scope.chan = "";
+        $scope.connection.channels.push($scope.connection.chan);
+        $scope.connection.chan = "";
     };
 
     // Start the IRC loop. If we get a PRIVMSG, farm it out to the controller
     // callback appropriate to the channel.
     $scope.logIn = function(username) {
-        $scope.username = username;
-        $scope.loggedIn = true;
+        $scope.connection.username = username;
+        $scope.connection.loggedIn = true;
 
         ircLoop(username, function(message) {
             if (message.command == "PRIVMSG") {
                 // Standardise the incoming messages. If this is a direct
                 // message to a channel that doesn't exist, we'll have to
                 // create it.
-                if (isDirectMessage(message, $scope.username)) {
+                if (isDirectMessage(message, $scope.connection.username)) {
                     message = mutateDirectMsg(message);
 
                     // If we create a channel, it won't have registered its
                     // callback in time. Wait before we call it.
-                    if ($scope.channels.indexOf(message.params) == -1) {
+                    if ($scope.connection.channels.indexOf(message.params) == -1) {
                         $scope.$apply(function() {
-                            $scope.channels.push(message.params);
+                            $scope.connection.channels.push(message.params);
                         });
 
                         window.setTimeout(
@@ -102,7 +104,7 @@ pyrcApp.controller("ChannelController", function($scope) {
         window.conn.send(message);
 
         $scope.messages.push({
-            from: $scope.username,
+            from: $scope.connection.username,
             text: $scope.msg
         });
 
