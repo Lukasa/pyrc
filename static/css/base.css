@@ -5,3 +5,9 @@ Base CSS for Pyrc
 body {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
+
+.channel {
+    border-top-style: solid;
+    border-top-width: 3px;
+    border-top-color: gray;
+}
