@@ -66,10 +66,10 @@ pyrcApp.controller("ChannelController", function($scope) {
 
     $scope.init = function(channel) {
         // Save off the channel.
-        $scope.channel = channel;
+        $scope.channel = channel.toLowerCase();
 
         // Add the message callback to the channel map.
-        channels[channel] = function(message) {
+        channels[channel.toLowerCase()] = function(message) {
             $scope.$apply(function() {
                 if (message.command == "PRIVMSG") {
                     $scope.messages.push({
@@ -87,13 +87,13 @@ pyrcApp.controller("ChannelController", function($scope) {
         if (channel.indexOf('#') !== 0) return;
 
         try {
-            window.conn.send(irc.joinChannel(channel));
+            window.conn.send(irc.joinChannel(channel.toLowerCase()));
         } catch (e) {
             var current = window.conn.onopen;
 
             window.conn.onopen = function() {
                 current();
-                window.conn.send(irc.joinChannel(channel));
+                window.conn.send(irc.joinChannel(channel.toLowerCase()));
             };
         }
     };
