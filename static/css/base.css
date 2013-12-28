@@ -11,3 +11,11 @@ body {
     border-top-width: 3px;
     border-top-color: gray;
 }
+
+.message:nth-child(odd) {
+    background-color: white;
+}
+
+.message:nth-child(even) {
+    background-color: gray;
+}
