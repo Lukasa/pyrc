@@ -60,6 +60,9 @@ pyrcApp.controller("ConnectionController", function($scope) {
     };
 });
 
+// Define a controller that manages a single IRC channel. This also manages
+// IRC direct message conversations by mocking them up as if they are a
+// channel.
 pyrcApp.controller("ChannelController", function($scope) {
     $scope.messages = [];
     $scope.msg = "";
