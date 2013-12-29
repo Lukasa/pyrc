@@ -45,6 +45,10 @@ body {
     font-size: 22px;
 }
 
+.active {
+    background-color: white;
+}
+
 .header {
     position: absolute;
     top: 0;

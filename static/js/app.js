@@ -12,6 +12,7 @@ pyrcApp.controller("ConnectionController", function($scope) {
     $scope.connection = {
         username: "",
         channels: [],
+        active: "",
         chan: "",
         loggedIn: false
     };
@@ -19,6 +20,7 @@ pyrcApp.controller("ConnectionController", function($scope) {
     // Join a new channel.
     $scope.joinIrcChannel = function() {
         $scope.connection.channels.push($scope.connection.chan);
+        $scope.connection.active = $scope.connection.chan;
         $scope.connection.chan = "";
     };
 
