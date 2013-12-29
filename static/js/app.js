@@ -11,7 +11,7 @@ var channels = {};
 pyrcApp.controller("ConnectionController", function($scope) {
     $scope.connection = {
         username: "",
-        channels: ["#python-requests"],
+        channels: [],
         chan: "",
         loggedIn: false
     };
