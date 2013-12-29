@@ -26,3 +26,27 @@ body {
 .message:nth-child(even) {
     background-color: gray;
 }
+
+.tabs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 160px;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 160px;
+    right: 0;
+    height: 50px;
+}
+
+.content {
+    position: absolute;
+    top: 50px;
+    left: 160px;
+    right: 0;
+    bottom: 0;
+}

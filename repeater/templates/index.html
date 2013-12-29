@@ -16,13 +16,14 @@
     <script src="/static/js/app.js"></script>
 </head>
 <body ng-controller="ConnectionController">
-    <h1>Welcome to PyRC.</h1>
-    <div ng-if="connection.loggedIn">
-        <p>Join new channel: <input type="text" ng-model="connection.chan" luk-enter="joinIrcChannel()"><input type="button" value="join" ng-click="joinIrcChannel()"></p>
+    <h1 class="header">Welcome to PyRC.</h1>
 
-        <ul>
-            <li ng-repeat="channel in connection.channels">{{channel}}</li>
-        </ul>
+    <ul class="tabs">
+        <li ng-repeat="channel in connection.channels">{{channel}}</li>
+    </ul>
+
+    <div class="content" ng-if="connection.loggedIn">
+        <p>Join new channel: <input type="text" ng-model="connection.chan" luk-enter="joinIrcChannel()"><input type="button" value="join" ng-click="joinIrcChannel()"></p>
 
         <div ng-repeat="channel in connection.channels" ng-controller="ChannelController" ng-init="init(channel)" class="channel">
             <h2>{{channel}}</h2>
@@ -30,7 +31,7 @@
             <p><input type="text" ng-model="msg" luk-enter="sendIrcMessage()"></p>
         </div>
     </div>
-    <div ng-if="!connection.loggedIn">
+    <div class="content" ng-if="!connection.loggedIn">
         <p>Username: <input type="text" ng-model="connection.username" luk-enter="logIn(connection.username)"><input type="button" value="join" ng-click="logIn(connection.username)"></p>
     </div>
 </body>
