@@ -26,7 +26,6 @@
         <p>Join new channel: <input type="text" ng-model="connection.chan" luk-enter="joinIrcChannel()"><input type="button" value="join" ng-click="joinIrcChannel()"></p>
 
         <div ng-repeat="channel in connection.channels" ng-controller="ChannelController" ng-init="init(channel)" class="channel" ng-class="{hidden: connection.active!==channel}">
-            <h2>{{channel}}</h2>
             <p ng-repeat="message in messages" class="message"><strong>{{message.from}}:</strong> {{message.text}}</p>
             <p><input type="text" ng-model="msg" luk-enter="sendIrcMessage()"></p>
         </div>
