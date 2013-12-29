@@ -12,6 +12,10 @@ body {
     border-top-color: gray;
 }
 
+.hidden {
+    display: none;
+}
+
 .message {
     margin: 0;
     padding-top: 4px;
