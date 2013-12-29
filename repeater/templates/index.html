@@ -27,7 +27,7 @@
 
         <div ng-repeat="channel in connection.channels" ng-controller="ChannelController" ng-init="init(channel)" class="channel" ng-class="{hidden: connection.active!==channel}">
             <p ng-repeat="message in messages" class="message"><strong>{{message.from}}:</strong> {{message.text}}</p>
-            <p><input type="text" ng-model="msg" luk-enter="sendIrcMessage()"></p>
+            <p class="message"><input type="text" ng-model="msg" luk-enter="sendIrcMessage()"></p>
         </div>
     </div>
     <div class="content" ng-if="!connection.loggedIn">

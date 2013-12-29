@@ -31,6 +31,10 @@ body {
     background-color: gray;
 }
 
+.message:last-child {
+    background-color: white;
+}
+
 .tabs {
     position: fixed;
     top: 0;
