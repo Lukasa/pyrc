@@ -115,3 +115,20 @@ pyrcApp.controller("ChannelController", function($scope) {
         $scope.msg = "";
     };
 });
+
+
+// Define a directive that fires when you hit the enter key while an element
+// is selected.
+pyrcApp.directive('lukEnter', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if (event.which === 13) {
+                scope.$apply(function() {
+                    scope.$eval(attrs.lukEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
