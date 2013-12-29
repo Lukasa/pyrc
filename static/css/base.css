@@ -35,15 +35,20 @@ body {
     padding: 0;
     margin: 0 10px 0 0;
     padding: 50px 0 0 10px;
-    width: 140px;
+    width: 180px;
     overflow: hidden;
     background-color: gray;
+}
+
+.tabs li {
+    margin: 5px 0;
+    font-size: 22px;
 }
 
 .header {
     position: absolute;
     top: 0;
-    left: 160px;
+    left: 200px;
     right: 0;
     height: 50px;
 }
@@ -51,7 +56,7 @@ body {
 .content {
     position: absolute;
     top: 50px;
-    left: 160px;
+    left: 200px;
     right: 0;
     bottom: 0;
 }
