@@ -23,18 +23,6 @@ body {
     border-top: 1px solid gray;
 }
 
-.message:nth-child(odd) {
-    background-color: white;
-}
-
-.message:nth-child(even) {
-    background-color: gray;
-}
-
-.message:last-child {
-    background-color: white;
-}
-
 .text-entry {
     width: 99%;
 }
