@@ -143,3 +143,41 @@ pyrcApp.directive('lukEnter', function() {
         });
     };
 });
+
+
+// This directive is an approximation of ng-show. It's extended to reduce the
+// unread messages count to zero whenever a channel window is unhidden.
+pyrcApp.directive('lukShow', function() {
+    // This directive affects the DOM, so we need to define a 'link' function.
+    // Why? Because Angular.js says so that's why.
+    var link = function($scope, element, attributes) {
+        // We define a truthy expression to watch.
+        var expression = attributes.lukShow;
+
+        // When initially evaluated, set up a default value based on the
+        // expression. If the expression is false, hide the element.
+        if (!$scope.$eval(expression)) {
+            element.hide();
+        }
+
+        // Now, watch the expression. If it changes, adjust the visibility of
+        // the element in question.
+        $scope.$watch(expression, function(newValue, oldValue) {
+            // If the value hasn't changed, do nothing. This should only ever
+            // happen once, at initialization.
+            if (newValue == oldValue) return;
+
+            // If the new expression is true, show the element, otherwise hide
+            // it.
+            if (newValue) {
+                element.show();
+                $scope.connection.unread[$scope.channel] = false;
+            } else {
+                element.hide();
+            }
+        });
+    };
+
+    // Return the directive, restricted to attributes only.
+    return {link: link, restrict: "A"};
+});
