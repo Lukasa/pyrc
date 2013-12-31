@@ -14,7 +14,8 @@ pyrcApp.controller("ConnectionController", function($scope) {
         channels: [],
         active: "",
         chan: "",
-        loggedIn: false
+        loggedIn: false,
+        unread: {}
     };
 
     // Join a new channel.
@@ -82,8 +83,16 @@ pyrcApp.controller("ChannelController", function($scope) {
                         text: message.trailing
                     });
                 }
+
+                // If we aren't active, mark us as having unread messages.
+                if ($scope.connection.active != $scope.channel) {
+                    $scope.connection.unread[$scope.channel] = true;
+                }
             });
         };
+
+        // We currently don't have unread messages.
+        $scope.connection.unread[channel.toLowerCase()] = false;
 
         // JOIN the channel. If we join too quickly, we'll try to send over
         // a websocket connection that isn't open yet. In that case, add our
