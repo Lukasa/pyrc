@@ -20,7 +20,7 @@
     <h1 class="header">Welcome to PyRC.</h1>
 
     <ul class="tabs">
-        <li ng-repeat="channel in connection.channels" ng-class="{active: connection.active===channel}" ng-click="connection.active = channel">{{channel}}</li>
+        <li ng-repeat="channel in connection.channels" ng-class="{active: connection.active===channel, unread: connection.unread[channel]}" ng-click="connection.active = channel">{{channel}}</li>
     </ul>
 
     <div class="content" ng-if="connection.loggedIn">
