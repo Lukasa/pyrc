@@ -9,14 +9,14 @@ body {
 .channel {
     border-top-style: solid;
     border-top-width: 3px;
-    border-top-color: gray;
+    border-top-color: #202020;
 }
 
 .message {
     margin: 0;
     padding-top: 4px;
     padding-bottom: 5px;
-    border-top: 1px solid gray;
+    border-top: 1px solid #202020;
 }
 
 .text-entry {
@@ -32,7 +32,8 @@ body {
     padding: 120px 0 0 10px;
     width: 180px;
     overflow: hidden;
-    background-color: gray;
+    background-color: #202020;
+    color: white;
 }
 
 .tabs li {
@@ -43,6 +44,7 @@ body {
 
 .active {
     background-color: white;
+    color: #202020;
 }
 
 .unread {
