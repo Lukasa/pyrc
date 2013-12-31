@@ -6,6 +6,7 @@ var pyrcApp = angular.module("pyrcApp", []);
 // out of messages.
 var channels = {};
 
+
 // Define the Connection controller. This handles top-level connection
 // function. In particular, it basically wraps the notion of multiple channels.
 pyrcApp.controller("ConnectionController", function($scope) {
@@ -62,6 +63,7 @@ pyrcApp.controller("ConnectionController", function($scope) {
         });
     };
 });
+
 
 // Define a controller that manages a single IRC channel. This also manages
 // IRC direct message conversations by mocking them up as if they are a
