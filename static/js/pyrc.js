@@ -10,7 +10,7 @@
 var openIRCConnection = function() {
     var host = window.location.hostname;
 
-    return new WebSocket("ws://" + host + "/wsock?server=chat.freenode.net");
+    return new WebSocket("ws://" + host + "/wsock/?server=chat.freenode.net");
 };
 
 
