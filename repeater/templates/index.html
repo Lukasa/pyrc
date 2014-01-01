@@ -30,8 +30,11 @@
             <p ng-repeat="message in messages" class="message"><strong>{{message.from}}:</strong> {{message.text}}</p>
             <p class="message"><input class= "text-entry" type="text" ng-model="msg" luk-enter="sendIrcMessage()"></p>
         </div>
+        <div ng-if="connection.channels.length===0" class="centered sub-centered">
+            <p>You haven't joined any channels. Click on the "New channel..." box at the bottom left, then type the name of the channel you want to join, including the leading "#", followed by <strong>enter</strong>. For example, "#python".</p>
+        </div>
     </div>
-    <div class="content-centered" ng-if="!connection.loggedIn">
+    <div class="content centered" ng-if="!connection.loggedIn">
         <p>PyRC is a service that allows you to connect to the Freenode IRC server through your web browser. No need to download an IRC client, and no need to worry about corporate firewalls. To connect to Freenode, just type in the username you'd like to use in the box below, then hit <strong>Enter</strong>.</p>
         <p>Username: <input type="text" ng-model="connection.username" luk-enter="logIn(connection.username)"><input type="button" value="join" ng-click="logIn(connection.username)"></p>
         <p>Please note: PyRC is in an early beta. There will certainly be bugs. Please be forgiving!</p>
