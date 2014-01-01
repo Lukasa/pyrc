@@ -21,9 +21,14 @@ class HomeHandler(RequestHandler):
     Render the home page. For now there's no intelligent logic here, but there
     might be at a later date.
     """
+    index = ''
+
     def get(self):
-        with open(INDEX_LOC, 'r') as f:
-            self.write(f.read())
+        if not self.index:
+            with open(INDEX_LOC, 'r') as f:
+                self.index = f.read()
+
+        self.write(self.index)
 
 
 # Define the top-level Tornado application.
