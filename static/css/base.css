@@ -6,12 +6,6 @@ body {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
-.channel {
-    border-top-style: solid;
-    border-top-width: 3px;
-    border-top-color: #202020;
-}
-
 .message {
     margin: 0;
     padding-top: 4px;

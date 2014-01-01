@@ -26,7 +26,7 @@
     <textarea class="join" ng-model="connection.chan" luk-enter="joinIrcChannel()" ng-if="connection.loggedIn">Join new channel...</textarea>
 
     <div class="content" ng-if="connection.loggedIn">
-        <div ng-repeat="channel in connection.channels" ng-controller="ChannelController" ng-init="init(channel)" class="channel" luk-show="connection.active===channel">
+        <div ng-repeat="channel in connection.channels" ng-controller="ChannelController" ng-init="init(channel)" luk-show="connection.active===channel">
             <p ng-repeat="message in messages" class="message"><strong>{{message.from}}:</strong> {{message.text}}</p>
             <p class="message"><input class= "text-entry" type="text" ng-model="msg" luk-enter="sendIrcMessage()"></p>
         </div>
