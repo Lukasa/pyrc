@@ -178,6 +178,9 @@ pyrcApp.directive('lukShow', function() {
             if (newValue) {
                 element.show();
                 $scope.connection.unread[$scope.channel] = false;
+
+                // Scroll the window to the bottom of the text.
+                window.scrollTo(0, document.body.scrollHeight);
             } else {
                 element.hide();
             }
