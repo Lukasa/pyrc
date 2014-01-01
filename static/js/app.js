@@ -53,7 +53,7 @@ pyrcApp.controller("ConnectionController", function($scope) {
 
                         window.setTimeout(
                             function() {
-                                channels[message.params](message);
+                                channels[message.params.toLowerCase()](message);
                             },
                             50
                         );
@@ -62,7 +62,7 @@ pyrcApp.controller("ConnectionController", function($scope) {
                     }
                 }
 
-                channels[message.params](message);
+                channels[message.params.toLowerCase()](message);
             }
         });
     };
