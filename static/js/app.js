@@ -7,6 +7,10 @@ var pyrcApp = angular.module("pyrcApp", []);
 var channels = {};
 
 
+// The default text shown in the 'join new channel' input.
+var defaultChanText = "New channel...";
+
+
 // Define the Connection controller. This handles top-level connection
 // function. In particular, it basically wraps the notion of multiple channels.
 pyrcApp.controller("ConnectionController", function($scope) {
@@ -14,7 +18,7 @@ pyrcApp.controller("ConnectionController", function($scope) {
         username: "",
         channels: [],
         active: "",
-        chan: "",
+        chan: defaultChanText,
         loggedIn: false,
         unread: {}
     };
@@ -23,7 +27,7 @@ pyrcApp.controller("ConnectionController", function($scope) {
     $scope.joinIrcChannel = function() {
         $scope.connection.channels.push($scope.connection.chan);
         $scope.connection.active = $scope.connection.chan;
-        $scope.connection.chan = "";
+        $scope.connection.chan = defaultChanText;
     };
 
     // Start the IRC loop. If we get a PRIVMSG, farm it out to the controller

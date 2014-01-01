@@ -60,7 +60,22 @@ body {
     color: white;
     z-index: 999;
     text-align: center;
+}
 
+.join {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 25px;
+    width: 170px;
+    margin: 0 10px 30px 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #202020;
+    z-index: 999;
+    text-align: center;
+    padding: 0;
+    border: 0;
 }
 
 .content {
