@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="content-centered" ng-if="!connection.loggedIn">
-        <p>PyRC is a service that allows you to connect to the Freenode IRC server through your web browser. No need to download an IRC client, and no need to worry about corporate firewalls. To connect to Freenode, just type in the username you'd like to use in the box below, then hit <strong>Enter</strong>.
+        <p>PyRC is a service that allows you to connect to the Freenode IRC server through your web browser. No need to download an IRC client, and no need to worry about corporate firewalls. To connect to Freenode, just type in the username you'd like to use in the box below, then hit <strong>Enter</strong>.</p>
         <p>Username: <input type="text" ng-model="connection.username" luk-enter="logIn(connection.username)"><input type="button" value="join" ng-click="logIn(connection.username)"></p>
     </div>
 </body>
