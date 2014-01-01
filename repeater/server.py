@@ -8,6 +8,7 @@ does is provide access to the websocket repeater.
 """
 from tornado.ioloop import IOLoop
 from tornado.web import Application, RequestHandler
+from tornado.options import parse_command_line, define, options
 
 from .repeater import Repeater
 import os.path
@@ -44,5 +45,9 @@ application = Application(
 
 
 if __name__ == '__main__':
-    application.listen(80)
+    # Parse the command line.
+    define("port", default=80, type=int, help="The port that Pyrc will listen on")
+    parse_command_line()
+
+    application.listen(options.port)
     IOLoop.instance().start()
