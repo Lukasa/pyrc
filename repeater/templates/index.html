@@ -17,7 +17,7 @@
     <script src="/static/js/app.js"></script>
 </head>
 <body ng-controller="ConnectionController">
-    <h1 class="header">Welcome to PyRC.</h1>
+    <h1 class="header">PyRC</h1>
 
     <ul class="tabs">
         <li ng-repeat="channel in connection.channels" ng-class="{active: connection.active===channel, unread: connection.unread[channel]}" ng-click="connection.active = channel">{{channel}}</li>

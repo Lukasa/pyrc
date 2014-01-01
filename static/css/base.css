@@ -16,7 +16,7 @@ body {
     margin: 0;
     padding-top: 4px;
     padding-bottom: 5px;
-    border-top: 1px solid #202020;
+    border-top: 1px solid #F0F0F0;
 }
 
 .text-entry {
@@ -54,14 +54,18 @@ body {
 .header {
     position: absolute;
     top: 0;
-    left: 200px;
-    right: 0;
-    height: 50px;
+    left: 0;
+    height: 120px;
+    width: 200px;
+    color: white;
+    z-index: 999;
+    text-align: center;
+
 }
 
 .content {
     position: absolute;
-    top: 50px;
+    top: 0;
     left: 200px;
     right: 0;
     bottom: 0;
