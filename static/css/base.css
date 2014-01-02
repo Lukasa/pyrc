@@ -54,6 +54,7 @@ body {
     color: white;
     z-index: 999;
     text-align: center;
+    margin: 20px 0;
 }
 
 .join {
