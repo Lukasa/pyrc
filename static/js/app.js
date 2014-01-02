@@ -124,6 +124,9 @@ pyrcApp.controller("ChannelController", function($scope) {
 
     // Define the controller method for sending an IRC message.
     $scope.sendIrcMessage = function() {
+        // Avoid sending empty messages due to errant hits of 'enter'.
+        if (!$scope.msg) return;
+
         message = irc.privmsg($scope.channel, $scope.msg);
         window.conn.send(message);
 
