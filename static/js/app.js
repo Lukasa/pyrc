@@ -94,6 +94,10 @@ pyrcApp.controller("ChannelController", function($scope) {
                 if ($scope.connection.active != $scope.channel) {
                     $scope.connection.unread[$scope.channel] = true;
                 }
+
+                // If there are more than 100 messages in the channel, drop the
+                // excess.
+                truncateArray($scope.messages);
             });
         };
 
@@ -130,6 +134,9 @@ pyrcApp.controller("ChannelController", function($scope) {
 
         // Clear the message box.
         $scope.msg = "";
+
+        // Potentially truncate the list.
+        truncateArray($scope.messages);
     };
 });
 

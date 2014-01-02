@@ -81,3 +81,11 @@ var ircLoop = function(username, onMsgCallback) {
     conn.onmessage = msgHandlerLoop(conn, onMsgCallback);
     window.conn = conn;
 };
+
+
+// Truncates an array to a maximum size. Hardcoded to being 100.
+var truncateArray = function(array) {
+    for (var count = array.length; count > 100; count--) {
+        array.shift();
+    }
+};
