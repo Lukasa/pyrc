@@ -46,7 +46,7 @@ body {
 }
 
 .header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 120px;
@@ -57,7 +57,7 @@ body {
 }
 
 .join {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     height: 25px;
