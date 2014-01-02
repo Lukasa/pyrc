@@ -108,3 +108,14 @@ body {
     margin-bottom: auto;
     padding: 0 10px;
 }
+
+.inner-message {
+    margin-right: 80px;
+}
+
+.datestamp {
+    position: absolute;
+    right: 0;
+    font-size: 8px;
+    margin-right: 20px;
+}

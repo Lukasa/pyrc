@@ -86,7 +86,8 @@ pyrcApp.controller("ChannelController", function($scope) {
                 if (message.command == "PRIVMSG") {
                     $scope.messages.push({
                         from: message.prefix.split('!', 2)[0],
-                        text: message.trailing
+                        text: message.trailing,
+                        date: new Date()
                     });
                 }
 
@@ -132,7 +133,8 @@ pyrcApp.controller("ChannelController", function($scope) {
 
         $scope.messages.push({
             from: $scope.connection.username,
-            text: $scope.msg
+            text: $scope.msg,
+            date: new Date()
         });
 
         // Clear the message box.
