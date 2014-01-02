@@ -19,9 +19,11 @@
 <body ng-controller="ConnectionController">
     <h1 class="header">PyRC</h1>
 
-    <ul class="tabs">
-        <li ng-repeat="channel in connection.channels" ng-class="{active: connection.active===channel, unread: connection.unread[channel]}" ng-click="connection.active = channel">{{channel}}</li>
-    </ul>
+    <div class="tabwrapper">
+        <ul class="tabs">
+            <li ng-repeat="channel in connection.channels" ng-class="{active: connection.active===channel, unread: connection.unread[channel]}" ng-click="connection.active = channel">{{channel}}</li>
+        </ul>
+    </div>
 
     <textarea class="join" ng-model="connection.chan" luk-enter="joinIrcChannel()" ng-if="connection.loggedIn">Join new channel...</textarea>
 
