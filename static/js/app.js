@@ -37,7 +37,7 @@ pyrcApp.controller("ConnectionController", function($scope) {
         $scope.connection.loggedIn = true;
 
         ircLoop(username, function(message) {
-            if (message.command == "PRIVMSG") {
+            if ((message.command == "PRIVMSG") || (message.command == "JOIN")) {
                 // Standardise the incoming messages. If this is a direct
                 // message to a channel that doesn't exist, we'll have to
                 // create it.
@@ -83,17 +83,31 @@ pyrcApp.controller("ChannelController", function($scope) {
         // Add the message callback to the channel map.
         channels[channel.toLowerCase()] = function(message) {
             $scope.$apply(function() {
+                var from = message.prefix.split('!', 2)[0];
+
+                // Any PRIVMSG command gets printed.
+                // A JOIN command gets shown so long as the joiner doesn't have
+                // the same username we do.
                 if (message.command == "PRIVMSG") {
                     $scope.messages.push({
-                        from: message.prefix.split('!', 2)[0],
+                        from: from,
                         text: message.trailing,
-                        date: new Date()
+                        date: new Date(),
+                        priv: true
                     });
-                }
 
-                // If we aren't active, mark us as having unread messages.
-                if ($scope.connection.active != $scope.channel) {
-                    $scope.connection.unread[$scope.channel] = true;
+                    // If we aren't active, mark us as having unread messages.
+                    if ($scope.connection.active != $scope.channel) {
+                        $scope.connection.unread[$scope.channel] = true;
+                    }
+                } else if ((message.command == "JOIN") &&
+                           (from != $scope.connection.username)) {
+                    $scope.messages.push({
+                        from: from,
+                        text: "joined the channel.",
+                        date: new Date(),
+                        join: true
+                    });
                 }
 
                 // If there are more than 100 messages in the channel, drop the
@@ -134,7 +148,8 @@ pyrcApp.controller("ChannelController", function($scope) {
         $scope.messages.push({
             from: $scope.connection.username,
             text: $scope.msg,
-            date: new Date()
+            date: new Date(),
+            priv: true
         });
 
         // Clear the message box.
