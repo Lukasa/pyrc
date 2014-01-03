@@ -29,7 +29,10 @@
 
     <div class="content" ng-if="connection.loggedIn">
         <div ng-repeat="channel in connection.channels" ng-controller="ChannelController" ng-init="init(channel)" luk-show="connection.active===channel">
-            <div ng-repeat="message in messages" class="message"><div class="inner-message"><strong>{{message.from}}:</strong> {{message.text}}</div><div class="datestamp">{{message.date | date: 'h:mma'}}</div></div>
+            <div ng-repeat="message in messages" class="message">
+                <div class="inner-message"><strong>{{message.from}}:</strong> {{message.text}}</div>
+                <div class="datestamp">{{message.date | date: 'h:mma'}}</div>
+            </div>
             <p class="message"><input class= "text-entry" type="text" ng-model="msg" luk-enter="sendIrcMessage()"></p>
         </div>
         <div ng-if="connection.channels.length===0" class="centered sub-centered">
