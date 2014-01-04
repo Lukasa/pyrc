@@ -71,12 +71,16 @@ var msgHandlerLoop = function(connection, onMsgCallback) {
 
 
 // A shim in place to get stuff working quickly. Logs in to chat.freenode.net
-// with a hardcoded-username, joins a single IRC channel, and logs everything
+// with a hardcoded-username, joins the given IRC channels, and logs everything
 // to the console.
-var ircLoop = function(username, onMsgCallback) {
+var ircLoop = function(username, channels, onMsgCallback) {
     var conn = openIRCConnection();
     conn.onopen = function() {
         login(conn, username);
+
+        for (var i = 0; i < channels.length; i++) {
+            conn.send(irc.joinChannel(channels[i]));
+        }
     };
     conn.onmessage = msgHandlerLoop(conn, onMsgCallback);
     window.conn = conn;

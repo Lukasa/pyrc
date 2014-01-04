@@ -36,7 +36,7 @@ pyrcApp.controller("ConnectionController", function($scope) {
         $scope.connection.username = username;
         $scope.connection.loggedIn = true;
 
-        ircLoop(username, function(message) {
+        ircLoop(username, $scope.connection.channels, function(message) {
             if ((message.command == "PRIVMSG") || (message.command == "JOIN")) {
                 // Standardise the incoming messages. If this is a direct
                 // message to a channel that doesn't exist, we'll have to
@@ -120,21 +120,13 @@ pyrcApp.controller("ChannelController", function($scope) {
         $scope.connection.unread[channel.toLowerCase()] = false;
 
         // JOIN the channel. If we join too quickly, we'll try to send over
-        // a websocket connection that isn't open yet. In that case, add our
-        // message to the onopen action.
+        // a websocket connection that isn't open yet. In that case, move on.
         // Only do this if the channel name begins with a '#' sign.
         if (channel.indexOf('#') !== 0) return;
 
         try {
             window.conn.send(irc.joinChannel(channel.toLowerCase()));
-        } catch (e) {
-            var current = window.conn.onopen;
-
-            window.conn.onopen = function() {
-                current();
-                window.conn.send(irc.joinChannel(channel.toLowerCase()));
-            };
-        }
+        } catch (e) {}
     };
 
     // Define the controller method for sending an IRC message.
