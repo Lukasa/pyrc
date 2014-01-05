@@ -73,8 +73,23 @@ var msgHandlerLoop = function(connection, onMsgCallback) {
 // A shim in place to get stuff working quickly. Logs in to chat.freenode.net
 // with a hardcoded-username, joins the given IRC channels, and logs everything
 // to the console.
+// To handle reconnecting if the connection gets closed, we pass an onclose
+// callback that simply re-calls this function. That will open a new websocket
+// connection, re-login and re-join all the active channels.
 var ircLoop = function(username, channels, onMsgCallback) {
     var conn = openIRCConnection();
+
+    // It's possible that we will immediately fail here. That happens if the
+    // connection is refused. Assume that the situation is transient, and so
+    // wait a few seconds and try again.
+    if (conn.readyState === 3) {
+        window.setTimeout(function() {
+            ircLoop(username, channels, onMsgCallback);
+        },
+        2000);
+        return;
+    }
+
     conn.onopen = function() {
         login(conn, username);
 
@@ -83,6 +98,7 @@ var ircLoop = function(username, channels, onMsgCallback) {
         }
     };
     conn.onmessage = msgHandlerLoop(conn, onMsgCallback);
+    conn.onclose = function() {ircLoop(username, channels, onMsgCallback);};
     window.conn = conn;
 };
 
