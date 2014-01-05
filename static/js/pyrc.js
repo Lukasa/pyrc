@@ -9,8 +9,9 @@
 // of servers.
 var openIRCConnection = function() {
     var host = window.location.hostname;
+    var scheme = (window.location.protocol === "https:") ? "wss://" : "ws://";
 
-    return new WebSocket("ws://" + host + "/wsock/?server=chat.freenode.net");
+    return new WebSocket(scheme + host + "/wsock/?server=chat.freenode.net");
 };
 
 
